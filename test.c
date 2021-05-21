@@ -6,7 +6,7 @@ typedef struct treeNode {
 	char key;
 	struct treeNode* left;
 	struct treeNode* right;
-}treeNode;
+} treeNode;
 
 treeNode* searchBST(treeNode* root, char x) {
 	treeNode* p;
@@ -20,8 +20,8 @@ treeNode* searchBST(treeNode* root, char x) {
 	return p;
 }
 
-treeNode* insertNode(treeNode *p, char x) {
-	treeNode *newNode;
+treeNode* insertNode(treeNode* p, char x) {
+	treeNode* newNode;
 	if (p == NULL) {
 		newNode = (treeNode*)malloc(sizeof(treeNode));
 		newNode->key = x;
@@ -31,14 +31,14 @@ treeNode* insertNode(treeNode *p, char x) {
 	}
 	else if (x < p->key) p->left = insertNode(p->left, x);
 	else if (x > p->key) p->right = insertNode(p->right, x);
-	else printf("\n 이미 같은 키가 있습니다!! \n");
+	else printf("\n 이미 같은 키가 있습니다.\n");
 
 	return p;
 }
 
 void deleteNode(treeNode *root, element key) {
 	treeNode *parent, *p, *succ, *succ_parent;
-	treeNode *child;
+	treeNode* child;
 	parent = NULL;
 	p = root;
 	while ((p != NULL) && (p->key != key)) {
@@ -48,11 +48,11 @@ void deleteNode(treeNode *root, element key) {
 	}
 
 	if (p == NULL) {
-		printf("\n 찾는 키가 이진 트리에 없습니다!");
+		printf("\n 찾는 키가 이진 트리에 없습니다.");
 		return;
 	}
 
-	else if ((p->left == NULL) || (p->right == NULL)) {
+	if ((p->left) && (p->right == NULL)) {
 		if (parent != NULL) {
 			if (parent->left == p) parent->left = NULL;
 			else parent->right = NULL;
@@ -86,7 +86,7 @@ void deleteNode(treeNode *root, element key) {
 	free(p);
 }
 
-void displayInorder(treeNode* root) {
+void displayInorder(treeNode* root){
 	if (root) {
 		displayInorder(root->left);
 		printf("%c_", root->key);
@@ -109,7 +109,7 @@ int main() {
 	treeNode* root = NULL;
 	treeNode* foundedNode = NULL;
 	char choice, key;
-
+	
 	root = insertNode(root, 'G');
 	insertNode(root, 'I');
 	insertNode(root, 'H');
@@ -124,28 +124,26 @@ int main() {
 
 	while (1) {
 		menu();
-		scanf_s("%c", &choice, 1);
+		scanf_s(" %c", &choice, 1);
 
-		getchar(&choice);
-
-		switch (choice - '0') {
-		case 1: printf("\t[이진 트리 출력]  ");
+		switch (choice - '0')
+		{
+		case 1: printf("\t[이진 트리 출력] ");
 			displayInorder(root); printf("\n");
 			break;
-		
-		case 2: printf("삽입할 문자를 입력하세요: ");
-			scanf_s("%c", &key, 1);
+
+		case 2: printf("삽입할 문자를  입력하세요: ");
+			scanf_s(" %c", &key, 1);
 			insertNode(root, key);
 			break;
 
 		case 3: printf("삭제할 문자를 입력하세요: ");
-			scanf_s("%c", &key, 1);
-			deleteNode(root, key);
+			scanf_s(" %c", &key, 1);
+			deleteNode(" %c", &key, 1);
 			break;
 
 		case 4: printf("찾을 문자를 입력하세요: ");
-			scanf_s("%c", &key, 1);
-			foundedNode = searchBST(root, key);
+			scanf_s(" %c", &key, 1);
 			if (foundedNode != NULL)
 				printf("\n %c를 찾았습니다. \n", foundedNode->key);
 			else printf("\n 문자를 찾지 못했습니다. \n");
@@ -153,7 +151,7 @@ int main() {
 
 		case 5: return 0;
 
-		default: printf("없는 메뉴 입니다. 메뉴를 다시 선택하세요! \n");
+		default: printf("없는 메뉴입니다. 메뉴를 다시 선택하세요. \n");
 			break;
 		}
 	}
